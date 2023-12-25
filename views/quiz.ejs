@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quizes</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/quiz.css" />
+  </head>
+  <body>
+    <%- include("./partial/nav") %>
+    <!-- search form -->
+    <form class="form" action="/quizes/search" method="POST">
+      <input id="search" type="search" name="query" />
+      <button>search</button>
+    </form>
+    <div class="d-grid my-2 gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-primary" type="button"> <a style="color: white;" href="/quizes/createquiz">add quiz</a></button>
+    </div>
+    
+<table class="table table-striped">
+<tr>
+  <th>Quiz title</th>
+  <th>Quiz Description</th>
+  <th>No. questions</th>
+  <th>Quiz duration</th>
+  <th>Action</th>
+</tr>
+<div id="quiz" class="mt-2">
+<% if (quizes.length>0) { quizes.forEach((quiz)=>{ %>
+ <tr>
+  <td><%= quiz.Title %></td>
+  <td><%= quiz.description %></td>
+  <!-- <%  quiz.questions.forEach(q=>{q.question}) %> -->
+  <td><%=  quiz.questions.length %></td>
+  <td><%= quiz.duration.hours%>:<%=quiz.duration.minutes%>:<%=quiz.duration.seconds %></td>
+  <td>
+    <a class="text-success" href="/quizes/<%=quiz._id%>/questions" >
+      Take  
+    </a>
+    <a class="" href="/quizes/<%=quiz._id%>" >
+      details
+    </a>
+  <a class="delete" data-doc="<%= quiz._id %>">
+    <i class="fa fa-trash" aria-hidden="true"></i>
+  </a>
+  <a class="update" data-doc="<%= quiz._id %>">
+    <i class="fas fa-edit"></i>
+  </a>
+</td>
+</tr>
+  <% }) } %>
+</div>
+</table>
+    <!-- update ptoduct overlay -->
+    <div id="overlay">
+      <div class="form2" method="PUT">
+        <input type="text" placeholder="quiz title" id="Title" />
+        <input  type="number" id="hours" name="hours" placeholder="quiz hours" />
+        <input  type="number" id="minutes" name="minutes" placeholder="quiz minutes"/>
+        <input class="form-control" type="number" id="seconds" name="seconds" placeholder="quiz seconds"/>
+
+        <input type="text" placeholder="quiz category" id="category" />
+        <textarea placeholder="quiz description" id="description"></textarea>
+        <button id="btn btn-primary">edit</button>
+        <i class="fas fa-window-close"></i>
+      </div>
+    </div>
+    <script src="./javascripts/quizs.js"></script>
+  </body>
+</html>
+

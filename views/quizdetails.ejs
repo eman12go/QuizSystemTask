@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz details</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="/stylesheets/quiz.css" />
+    <style>
+      .card-body{
+        width: 85%;
+        margin: auto;
+
+      }
+    </style>
+  </head>
+  <body>
+    <%- include("./partial/nav") %>
+  
+
+    <div id="quiz" class="mt-2">
+
+  <div class="card px-3" style="width: 50%;margin: auto;">
+  <h2>Quiz title : <%= quiz.Title %> <font color="red"> duration : <%= quiz.duration.hours%>:<%=quiz.duration.minutes%>:<%=quiz.duration.seconds %> 
+  </font> </h2>
+  <p> Description: <%= quiz.description %> </p>
+  <div class="card-body ">
+    <h4 class="card-title">Questions</h4>
+    <p class="card-text">
+      <%  quiz.questions.forEach(q=>{ %> 
+        <div>
+        
+         <h5> <%= q.question %></h5>
+        <% for(let a=0; a< q.answers.length;a++) {%>
+         <% if(a==q.answer){%>
+          <p class="text-warning">
+            <%=q.answers[a].option %>
+           </p>
+       <%  } else{%>
+          <p>
+          <%=q.answers[a].option %>
+         </p>
+        
+         <%}}  %>
+        </div>
+        <% }) %>
+       
+        
+    </p>
+    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    <a class="delete" data-doc="<%= quiz._id %>" >
+      <i class="fa fa-trash" aria-hidden="true"></i>
+    </a>
+    <a class="update" data-doc="<%= quiz._id %>" >
+      <i class="fas fa-edit"></i>
+    </a>
+  </div>
+</div>
+
+
+    <script src="/javascripts/quizs.js"></script>
+  </body>
+</html>

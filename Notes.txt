@@ -1,0 +1,11 @@
+I tried to complete  Front of the project, but it didn't help me time,
+ so at first you'll find that you'll be forced to log in and then you can view quiz details and take it 
+
+
+Complete quiz: back only without front :)
+/quizes/:id/complete  => ex: http://localhost:3000/quizes/65873a89c0e1cfe1d37b4081/complete
+ it will be action for takequiz view not complete
+
+
+
+
